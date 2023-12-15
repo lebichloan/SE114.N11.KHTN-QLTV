@@ -10,7 +10,7 @@
     <RootNamespace>GUI</RootNamespace>
     <AssemblyName>GUI</AssemblyName>
   
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -93,6 +93,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+   <ItemGroup>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>     
+    </ItemGroup>
   <ItemGroup>
     <Compile Include="fAddDocGia.cs">
       <SubType>Form</SubType>
