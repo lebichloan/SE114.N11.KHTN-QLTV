@@ -10,8 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BUS</RootNamespace>
     <AssemblyName>BUS</AssemblyName>
-	  <TargetFrameworkVersion>4.8.09032</TargetFrameworkVersion>
-    <TargetFrameworks>net48</TargetFrameworks>
+	  <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
