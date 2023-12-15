@@ -10,7 +10,7 @@
     <RootNamespace>GUI</RootNamespace>
     <AssemblyName>GUI</AssemblyName>
   
-    <TargetFramework>net400</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
