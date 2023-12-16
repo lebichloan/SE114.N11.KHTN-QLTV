@@ -1,5 +1,5 @@
 
-name: .NET MAUI CI Build 
+name: .NET Build 
 
 on:
   push        :
@@ -67,9 +67,9 @@ jobs:
           dotnet restore
       -
         name: Build
-        working-directory: ./WorkScheduleReminder.MAUIBlazor
+        working-directory: ./DAL
         run : |
-          msbuild WorkScheduleReminder.MAUIBlazor.csproj -r -p:Configuration=Debug -p:RestorePackages=false
+          msbuild DAL.csproj -r -p:Configuration=Debug -p:RestorePackages=false
 
       #--- _Normal_ Testing ---#
 
@@ -82,7 +82,7 @@ jobs:
 
       -
         name: Mutation Test
-        working-directory: ./WorkScheduleReminder.Testing
+        working-directory: ./UnitTesting
         run : |
           dotnet   tool restore
           dotnet dotnet-stryker
@@ -91,4 +91,4 @@ jobs:
         uses: actions/upload-artifact@v3.1.3
         with:
           name: dotnet-stryker-mutation-report
-          path: ./WorkScheduleReminder.Testing/StrykerOutput/**/**/*.html
+          path: ./StrykerOutput/**/**/*.html
