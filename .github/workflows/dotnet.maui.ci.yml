@@ -3,13 +3,13 @@ name: .NET Build
 
 on:
   push        :
-    branches: [ "master" ]
+    branches: [ "main" ]
     paths-ignore:
       - '**/*.md'
       - '**/*.gitignore'
       - '**/*.gitattributes'
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
