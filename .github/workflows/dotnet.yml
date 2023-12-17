@@ -22,8 +22,9 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-        - packages:
-            - EntityFramework.6.4.4
+ 
+    - name: Instal Entity Framework
+      run: dotnet add package EntityFramework --version 6.4.4
     - name: Build
       run: dotnet build --no-restore
     - name: Test
