@@ -22,6 +22,12 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Setup Nuget
+        uses: Nuget/setup-nuget@v1.0.5
+
+      - name: Restore nuget packages
+        run: nuget restore QLTV.sln
+
       - name: Build
         run: dotnet build
       - name: Test
