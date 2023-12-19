@@ -22,7 +22,10 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Install Nuget
+        run: nuget install packages.config
+
       - name: Build
-        run: dotnet build
+        run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
