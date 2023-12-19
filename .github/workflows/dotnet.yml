@@ -11,8 +11,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+        nuget: [latest, preview, 4.x, 5.3.1]
+
+    name: NuGet@${{ matrix.nuget }} sample
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -24,6 +30,8 @@ jobs:
 
       - name: Setup Nuget
         uses: Nuget/setup-nuget@v1
+        with:
+          nuget-version: ${{ matrix.nuget }}
 
       - name: Restore nuget packages
         run: nuget restore QLTV.sln
