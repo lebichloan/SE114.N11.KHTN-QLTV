@@ -24,7 +24,7 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - name: Restore dependencies
-        run: dotnet build --runtime net6.0-x86
+        run: dotnet build
 
       - name: Build
         run: dotnet build
