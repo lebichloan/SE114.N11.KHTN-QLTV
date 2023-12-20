@@ -106,7 +106,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Resources.Extensions" Version="4.7.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="fAddDocGia.cs">
