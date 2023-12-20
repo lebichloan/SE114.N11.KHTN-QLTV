@@ -84,7 +84,7 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
             
                 return false;
