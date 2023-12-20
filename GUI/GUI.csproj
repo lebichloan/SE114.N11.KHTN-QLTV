@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>GUI</RootNamespace>
     <AssemblyName>GUI</AssemblyName>
-    <TargetFrameworks>net472;net5.0-windows</TargetFrameworks>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <GenerateResourceMSBuildArchitecture>CurrentArchitecture</GenerateResourceMSBuildArchitecture>
     <GenerateResourceMSBuildRuntime>CurrentRuntime</GenerateResourceMSBuildRuntime>
