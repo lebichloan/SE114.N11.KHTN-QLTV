@@ -50,13 +50,13 @@ namespace UnitTesting
             var baocao = new CT_BCLUOTMUONTHEOTHELOAI { idBaoCao = 1, idTheLoai = 1, SoLuotMuon = 2 };
             var data = new List<CT_BCLUOTMUONTHEOTHELOAI> { baocao };
             var mockData = data.AsQueryable();
-            CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTBCDbSetMock!.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
-            CT_BCLUOTMUONTHEOTHELOAI result = dalCTBCTheoTheLoai.GetCTBC(idBaoCao, idTheLoai);
+            CT_BCLUOTMUONTHEOTHELOAI result = dalCTBCTheoTheLoai!.GetCTBC(idBaoCao, idTheLoai);
 
             // Assert
             Assert.IsNotNull(result);
@@ -73,7 +73,7 @@ namespace UnitTesting
             var nonExistingIdTheLoai = 888;
 
             // Act
-            CT_BCLUOTMUONTHEOTHELOAI result = dalCTBCTheoTheLoai.GetCTBC(nonExistingIdBC, nonExistingIdTheLoai);
+            CT_BCLUOTMUONTHEOTHELOAI result = dalCTBCTheoTheLoai!.GetCTBC(nonExistingIdBC, nonExistingIdTheLoai);
 
             // Assert
             Assert.IsNull(result);
@@ -84,19 +84,18 @@ namespace UnitTesting
         {
             // Arrange
 
-            var idBaoCao = 1;
-            var idTheLoai = 1;
+    
             var baocao = new CT_BCLUOTMUONTHEOTHELOAI { idBaoCao = 1, idTheLoai = 1, SoLuotMuon = 2 };
             var data = new List<CT_BCLUOTMUONTHEOTHELOAI> { baocao };
             var mockData = data.AsQueryable();
-            CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTBCDbSetMock!.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
 
-            List<CT_BCLUOTMUONTHEOTHELOAI> result = dalCTBCTheoTheLoai.GetAllCTBC();
+            List<CT_BCLUOTMUONTHEOTHELOAI> result = dalCTBCTheoTheLoai!.GetAllCTBC();
 
 
             // Assert
@@ -111,11 +110,11 @@ namespace UnitTesting
         {
             var baocao = new CT_BCLUOTMUONTHEOTHELOAI { idBaoCao = 1, idTheLoai = 1, SoLuotMuon = 2 };
 
-            bool result = dalCTBCTheoTheLoai.AddCTBC(baocao);
+            bool result = dalCTBCTheoTheLoai!.AddCTBC(baocao);
 
             Assert.IsTrue(result);
 
-            dbContextMock.Verify(m => m.CT_BCLUOTMUONTHEOTHELOAI.Add(baocao), Times.Once());
+            dbContextMock!.Verify(m => m.CT_BCLUOTMUONTHEOTHELOAI.Add(baocao), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
         }
@@ -132,7 +131,7 @@ namespace UnitTesting
             var existingCTBC = new CT_BCLUOTMUONTHEOTHELOAI { idBaoCao = idBaoCao, idTheLoai = idTheLoai, SoLuotMuon = soLuotMuon };
             var data = new List<CT_BCLUOTMUONTHEOTHELOAI> { existingCTBC };
             var mockData = data.AsQueryable();
-            CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTBCDbSetMock!.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
@@ -142,12 +141,12 @@ namespace UnitTesting
             var initialSoLuotMuon = existingCTBC.SoLuotMuon;
 
             // Act
-            bool result = dalCTBCTheoTheLoai.UpdCTBC(idBaoCao, idTheLoai, soLuotMuon);
+            bool result = dalCTBCTheoTheLoai!.UpdCTBC(idBaoCao, idTheLoai, soLuotMuon);
 
             // Assert
             Assert.IsTrue(result);
 
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
 
 
 
@@ -185,7 +184,7 @@ namespace UnitTesting
             var idTheLoai = 2;
             var soLuotMuon = 2;
             // Act
-            bool result = dalCTBCTheoTheLoai.UpdCTBC(idBaoCao, idTheLoai, soLuotMuon);
+            bool result = dalCTBCTheoTheLoai!.UpdCTBC(idBaoCao, idTheLoai, soLuotMuon);
 
             // Assert
             Assert.IsFalse(result);
@@ -203,19 +202,19 @@ namespace UnitTesting
             var existingCTBC = new CT_BCLUOTMUONTHEOTHELOAI { idBaoCao = idBaoCao, idTheLoai = idTheLoai, SoLuotMuon = soLuotMuon };
             var data = new List<CT_BCLUOTMUONTHEOTHELOAI> { existingCTBC };
             var mockData = data.AsQueryable();
-            CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTBCDbSetMock!.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTBCDbSetMock.As<IQueryable<CT_BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
                 
 
             // Act
-            bool result = dalCTBCTheoTheLoai.DelCTBC(idBaoCao, idTheLoai);
+            bool result = dalCTBCTheoTheLoai!.DelCTBC(idBaoCao, idTheLoai);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
             CTBCDbSetMock.Verify(m => m.Remove(existingCTBC), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
 
         }
 
@@ -225,10 +224,10 @@ namespace UnitTesting
             // Arrange
             var idBaoCao = 1;
             var idTheLoai = 2;
-            var soLuotMuon = 2;
+            
 
             // Act
-            bool result = dalCTBCTheoTheLoai.DelCTBC(idBaoCao, idTheLoai);
+            bool result = dalCTBCTheoTheLoai!.DelCTBC(idBaoCao, idTheLoai);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại
@@ -282,7 +281,7 @@ namespace UnitTesting
             // Arrange
             var idBaoCao = 44;
             var idTheLoai = 44;
-            var soLuotMuon = 2;
+            
             var mockRepository = new MockRepository(MockBehavior.Default);
             var bcMock = mockRepository.Create<CT_BCLUOTMUONTHEOTHELOAI>();
 

@@ -45,9 +45,9 @@ namespace UnitTesting
             // Arrange
 
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
             // Act
-            List<LOAIDOCGIA> result = dalLoaiDocGia.GetAllLoaiDocGia();
+            List<LOAIDOCGIA> result = dalLoaiDocGia!.GetAllLoaiDocGia();
 
 
             // Assert
@@ -62,11 +62,11 @@ namespace UnitTesting
         {
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
 
-            bool result = dalLoaiDocGia.AddLoaiDocGia(loaiDocGia);
+            bool result = dalLoaiDocGia!.AddLoaiDocGia(loaiDocGia);
 
             Assert.IsTrue(result);
-            LoaiDocGiaDbSetMock.Verify(m => m.Add(loaiDocGia), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            LoaiDocGiaDbSetMock!.Verify(m => m.Add(loaiDocGia), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
         }
 
         [TestMethod]
@@ -76,9 +76,9 @@ namespace UnitTesting
 
             var existingDocGiaId = 1;
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
             // Act
-            LOAIDOCGIA result = dalLoaiDocGia.GetLoaiDocGiaById(existingDocGiaId);
+            LOAIDOCGIA result = dalLoaiDocGia!.GetLoaiDocGiaById(existingDocGiaId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -93,7 +93,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            LOAIDOCGIA result = dalLoaiDocGia.GetLoaiDocGiaById(nonExistingTacGiaId);
+            LOAIDOCGIA result = dalLoaiDocGia!.GetLoaiDocGiaById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -107,9 +107,9 @@ namespace UnitTesting
 
             var existingMaLoaiDocGia = "LDG001";
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
             // Act
-            LOAIDOCGIA result = dalLoaiDocGia.GetLoaiDocGiaByMa(existingMaLoaiDocGia);
+            LOAIDOCGIA result = dalLoaiDocGia!.GetLoaiDocGiaByMa(existingMaLoaiDocGia);
 
             // Assert
             Assert.IsNotNull(result);
@@ -124,7 +124,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            LOAIDOCGIA result = dalLoaiDocGia.GetLoaiDocGiaByMa(nonExistingMaTacGia);
+            LOAIDOCGIA result = dalLoaiDocGia!.GetLoaiDocGiaByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -137,10 +137,10 @@ namespace UnitTesting
             var tenLoaiDocGia = "Doc Gia 1";
           
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
 
             // Act
-            var result = dalLoaiDocGia.FindLoaiDocGia(tenLoaiDocGia);
+            var result = dalLoaiDocGia!.FindLoaiDocGia(tenLoaiDocGia);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null
@@ -155,10 +155,10 @@ namespace UnitTesting
             var tenLoaiDocGia = "Doc Gia 3";
 
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
 
             // Act
-            var result = dalLoaiDocGia.FindLoaiDocGia(tenLoaiDocGia);
+            var result = dalLoaiDocGia!.FindLoaiDocGia(tenLoaiDocGia);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null
@@ -174,11 +174,11 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
 
 
             // Act
-            var result = dalLoaiDocGia.UpdLoaiDocGia(loaiDocGia.id, tenLoaiDocGia);
+            var result = dalLoaiDocGia!.UpdLoaiDocGia(loaiDocGia.id, tenLoaiDocGia);
 
             // Assert
             Assert.IsTrue(result); 
@@ -195,7 +195,7 @@ namespace UnitTesting
             var tenLoaiDocGia = "Doc Gia 2";
 
             // Act
-            var result = dalLoaiDocGia.UpdLoaiDocGia(nonExistingIdLoaiDocGia, tenLoaiDocGia);
+            var result = dalLoaiDocGia!.UpdLoaiDocGia(nonExistingIdLoaiDocGia, tenLoaiDocGia);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm UpdTongNoDocGia trả về false khi không tìm thấy dữ liệu
@@ -209,16 +209,16 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var loaiDocGia = new LOAIDOCGIA { id = 1, MaLoaiDocGia = "LDG001", TenLoaiDocGia = "Doc Gia 1" };
-            dbContextMock.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
+            dbContextMock!.Setup(db => db.LOAIDOCGIAs.Find(loaiDocGia.id)).Returns(loaiDocGia);
 
             // Act
-            bool result = dalLoaiDocGia.DelLoaiDocGia(existingLoaiDocGiaId);
+            bool result = dalLoaiDocGia!.DelLoaiDocGia(existingLoaiDocGiaId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            LoaiDocGiaDbSetMock.Verify(m => m.Find(existingLoaiDocGiaId), Times.Once);
+            LoaiDocGiaDbSetMock!.Verify(m => m.Find(existingLoaiDocGiaId), Times.Once);
             LoaiDocGiaDbSetMock.Verify(m => m.Remove(loaiDocGia), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -230,7 +230,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalLoaiDocGia.DelLoaiDocGia(nonExistingTacGiaId);
+            bool result = dalLoaiDocGia!.DelLoaiDocGia(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại

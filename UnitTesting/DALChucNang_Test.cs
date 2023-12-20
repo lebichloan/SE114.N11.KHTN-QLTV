@@ -45,9 +45,9 @@ namespace UnitTesting
             // Arrange
 
             var chucnang = new CHUCNANG { id  = 1, MaChucNang = "CN001", TenChucNang = "Kiem Thu", TenManHinh = "Login" };
-            dbContextMock.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
+            dbContextMock!.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
             // Act
-            List<CHUCNANG> result = dalChucNang.GetAllChucNang();
+            List<CHUCNANG> result = dalChucNang!.GetAllChucNang();
 
 
             // Assert
@@ -64,9 +64,9 @@ namespace UnitTesting
 
             var existingMaChucNang = "CN001";
             var chucnang = new CHUCNANG { id  = 1, MaChucNang = "CN001", TenChucNang = "Kiem Thu", TenManHinh = "Login" };
-            dbContextMock.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
+            dbContextMock!.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
             // Act
-            CHUCNANG result = dalChucNang.GetChucNangByMa(existingMaChucNang);
+            CHUCNANG result = dalChucNang!.GetChucNangByMa(existingMaChucNang);
 
             // Assert
             Assert.IsNotNull(result);
@@ -81,7 +81,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            CHUCNANG result = dalChucNang.GetChucNangByMa(nonExistingMaTacGia);
+            CHUCNANG result = dalChucNang!.GetChucNangByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -95,9 +95,9 @@ namespace UnitTesting
 
             var id = 1;
             var chucnang = new CHUCNANG { id  = 1, MaChucNang = "CN001", TenChucNang = "Kiem Thu", TenManHinh = "Login" };
-            dbContextMock.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
+            dbContextMock!.Setup(db => db.CHUCNANGs.Find(chucnang.id)).Returns(chucnang);
             // Act
-            CHUCNANG result = dalChucNang.GetChucNangById(id);
+            CHUCNANG result = dalChucNang!.GetChucNangById(id);
 
             // Assert
             Assert.IsNotNull(result);
@@ -112,7 +112,7 @@ namespace UnitTesting
             var id = 999;
 
             // Act
-            CHUCNANG result = dalChucNang.GetChucNangById(id);
+            CHUCNANG result = dalChucNang!.GetChucNangById(id);
 
             // Assert
             Assert.IsNull(result);

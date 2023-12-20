@@ -47,9 +47,9 @@ namespace UnitTesting
             // Arrange
 
             var baocao = new BCSACHTRATRE { Ngay = DateTime.Now, idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
-            dbContextMock.Setup(db => db.BCSACHTRATREs.Find(baocao.idCuonSach)).Returns(baocao);
+            dbContextMock!.Setup(db => db.BCSACHTRATREs.Find(baocao.idCuonSach)).Returns(baocao);
             // Act
-            List<BCSACHTRATRE> result = dalBCSachTraTre.GetAllBaoCao();
+            List<BCSACHTRATRE> result = dalBCSachTraTre!.GetAllBaoCao();
 
 
             // Assert
@@ -66,10 +66,10 @@ namespace UnitTesting
 
             var existingngayBC = DateTime.Now;
             var baocao = new BCSACHTRATRE { Ngay = DateTime.Now, idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
-            dbContextMock.Setup(db => db.BCSACHTRATREs.Find(baocao.idCuonSach)).Returns(baocao);
+            dbContextMock!.Setup(db => db.BCSACHTRATREs.Find(baocao.idCuonSach)).Returns(baocao);
 
             // Act
-            List<BCSACHTRATRE> result = dalBCSachTraTre.FindBaoCaoByDate(existingngayBC);
+            List<BCSACHTRATRE> result = dalBCSachTraTre!.FindBaoCaoByDate(existingngayBC);
 
             // Assert
             Assert.IsNotNull(result);
@@ -91,14 +91,14 @@ namespace UnitTesting
             var baocao = new BCSACHTRATRE { Ngay = DateTime.Now, idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
             var data = new List<BCSACHTRATRE> { baocao };
             var mockData = data.AsQueryable();
-            bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            bcSachTraTreDbSetMock!.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Expression).Returns(mockData.Expression);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
 
             // Act
-            List<BCSACHTRATRE> result = dalBCSachTraTre.FindBaoCaoByCuonSach(existingCuonSach);
+            List<BCSACHTRATRE> result = dalBCSachTraTre!.FindBaoCaoByCuonSach(existingCuonSach);
 
             // Assert
             Assert.IsNotNull(result);
@@ -116,9 +116,9 @@ namespace UnitTesting
             var baocao = new BCSACHTRATRE { Ngay = DateTime.Now, idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
 
             var cuonSach = new CUONSACH { id = 1 };
-            dbContextMock.Setup(db => db.CUONSACHes.Find(cuonSach.id)).Returns(cuonSach);
+            dbContextMock!.Setup(db => db.CUONSACHes.Find(cuonSach.id)).Returns(cuonSach);
 
-            bool result = dalBCSachTraTre.AddBaoCao(baocao);
+            bool result = dalBCSachTraTre!.AddBaoCao(baocao);
 
             Assert.IsTrue(result);
             dbContextMock.Verify(m => m.BCSACHTRATREs.Add(baocao), Times.Once());
@@ -136,20 +136,20 @@ namespace UnitTesting
             var baocao = new BCSACHTRATRE { Ngay = ngay, idCuonSach = idCuonSach, NgayMuon = DateTime.Now, SoNgayTre = 3 };
             var data = new List<BCSACHTRATRE> { baocao };
             var mockData = data.AsQueryable();
-            bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            bcSachTraTreDbSetMock!.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Expression).Returns(mockData.Expression);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
 
             // Act
-            bool result = dalBCSachTraTre.DelBaoCao(ngay, idCuonSach);
+            bool result = dalBCSachTraTre!.DelBaoCao(ngay, idCuonSach);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
     
             bcSachTraTreDbSetMock.Verify(m => m.Remove(baocao), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
 
         }
 
@@ -161,7 +161,7 @@ namespace UnitTesting
             var idCuonSach = 999;
 
             // Act
-            bool result = dalBCSachTraTre.DelBaoCao(ngay, idCuonSach);
+            bool result = dalBCSachTraTre!.DelBaoCao(ngay, idCuonSach);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại
@@ -180,14 +180,14 @@ namespace UnitTesting
             var baocao = new BCSACHTRATRE { Ngay = new DateTime(2024, 12, 10), idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
             var data = new List<BCSACHTRATRE> { baocao };
             var mockData = data.AsQueryable();
-            bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            bcSachTraTreDbSetMock!.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Expression).Returns(mockData.Expression);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
 
             // Act
-            var result = dalBCSachTraTre.GetBaoCao(ngay, idCuonSach);
+            var result = dalBCSachTraTre!.GetBaoCao(ngay, idCuonSach);
 
             // Assert
             Assert.IsNotNull(result);
@@ -209,14 +209,14 @@ namespace UnitTesting
             var baocao = new BCSACHTRATRE { Ngay = ngay, idCuonSach = 1, NgayMuon = DateTime.Now, SoNgayTre = 3 };
             var data = new List<BCSACHTRATRE> { baocao };
             var mockData = data.AsQueryable();
-            bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            bcSachTraTreDbSetMock!.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Provider).Returns(mockData.Provider);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.Expression).Returns(mockData.Expression);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             bcSachTraTreDbSetMock.As<IQueryable<BCSACHTRATRE>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
 
             // Act
-            var result = dalBCSachTraTre.GetBaoCao(ngay, idCuonSach);
+            var result = dalBCSachTraTre!.GetBaoCao(ngay, idCuonSach);
 
             // Assert
             Assert.IsNotNull(result);

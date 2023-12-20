@@ -47,14 +47,14 @@ namespace UnitTesting
             var cuonsach = new CUONSACH { id = 1, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1 };
             var data = new List<CUONSACH> { cuonsach };
             var mockData = data.AsQueryable();
-            cuonSachDbSetMock.As<IQueryable<CUONSACH>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            cuonSachDbSetMock!.As<IQueryable<CUONSACH>>().Setup(m => m.Provider).Returns(mockData.Provider);
             cuonSachDbSetMock.As<IQueryable<CUONSACH>>().Setup(m => m.Expression).Returns(mockData.Expression);
             cuonSachDbSetMock.As<IQueryable<CUONSACH>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             cuonSachDbSetMock.As<IQueryable<CUONSACH>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
 
-            List<CUONSACH> result = dalCuonSach.GetAllCuonSach();
+            List<CUONSACH> result = dalCuonSach!.GetAllCuonSach();
 
 
             // Assert
@@ -71,9 +71,9 @@ namespace UnitTesting
 
             var existingCuonSachId = 1;
             var cuonsach = new CUONSACH { id = existingCuonSachId, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1 };
-            dbContextMock.Setup(db => db.CUONSACHes.Find(cuonsach.id)).Returns(cuonsach);
+            dbContextMock!.Setup(db => db.CUONSACHes.Find(cuonsach.id)).Returns(cuonsach);
             // Act
-            CUONSACH result = dalCuonSach.GetCuonSachById(existingCuonSachId);
+            CUONSACH result = dalCuonSach!.GetCuonSachById(existingCuonSachId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -88,7 +88,7 @@ namespace UnitTesting
             var nonExistingCuonSachId = 999;
 
             // Act
-            CUONSACH result = dalCuonSach.GetCuonSachById(nonExistingCuonSachId);
+            CUONSACH result = dalCuonSach!.GetCuonSachById(nonExistingCuonSachId);
 
             // Assert
             Assert.IsNull(result);
@@ -102,9 +102,9 @@ namespace UnitTesting
 
             var existingMaCuonSach = "Sach001";
             var cuonsach = new CUONSACH { id = 1, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1 };
-            dbContextMock.Setup(db => db.CUONSACHes.Find(cuonsach.id)).Returns(cuonsach);
+            dbContextMock!.Setup(db => db.CUONSACHes.Find(cuonsach.id)).Returns(cuonsach);
             // Act
-            CUONSACH result = dalCuonSach.GetCuonSachByMa(existingMaCuonSach);
+            CUONSACH result = dalCuonSach!.GetCuonSachByMa(existingMaCuonSach);
 
             // Assert
             Assert.IsNotNull(result);
@@ -119,7 +119,7 @@ namespace UnitTesting
             var nonExistingCuonSach= "NonExistingMaCuonSach";
 
             // Act
-            CUONSACH result = dalCuonSach.GetCuonSachByMa(nonExistingCuonSach);
+            CUONSACH result = dalCuonSach!.GetCuonSachByMa(nonExistingCuonSach);
 
             // Assert
             Assert.IsNull(result);
@@ -130,11 +130,11 @@ namespace UnitTesting
         {
             var cuonSach = new CUONSACH { id = 1, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1 };
 
-            bool result = dalCuonSach.AddCuonSach(cuonSach);
+            bool result = dalCuonSach!.AddCuonSach(cuonSach);
 
             Assert.IsTrue(result);
 
-            dbContextMock.Verify(m => m.CUONSACHes.Add(cuonSach), Times.Once());
+            dbContextMock!.Verify(m => m.CUONSACHes.Add(cuonSach), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
 
@@ -146,7 +146,7 @@ namespace UnitTesting
             var tinhTrang = 2;
 
             var sach = new SACH { id = 1, SoLuongConLai = 3, SoLuong = 1 };
-            dbContextMock.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingCuongSach = new CUONSACH { id =idCuonSach, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1, SACH = sach };
             dbContextMock.Setup(db => db.CUONSACHes.Find(idCuonSach)).Returns(existingCuongSach);
@@ -156,7 +156,7 @@ namespace UnitTesting
             var initialTinhTrang = existingCuongSach.TinhTrang;
 
             // Act
-            bool result = dalCuonSach.UpdCuonSach(idCuonSach, tinhTrang);
+            bool result = dalCuonSach!.UpdCuonSach(idCuonSach, tinhTrang);
 
             // Assert
             Assert.IsTrue(result);
@@ -172,7 +172,7 @@ namespace UnitTesting
             var idCuonSach = 33;
             var tinhTrang = 1;
             // Act
-            bool result = dalCuonSach.UpdCuonSach(idCuonSach, tinhTrang);
+            bool result = dalCuonSach!.UpdCuonSach(idCuonSach, tinhTrang);
 
             // Assert
             Assert.IsFalse(result);
@@ -183,22 +183,22 @@ namespace UnitTesting
         {
             // Arrange
             var idCuonSach = 1;
-            var tinhTrang = 2;
+            
 
             var sach = new SACH { id = 1, SoLuongConLai = 3, SoLuong = 1 };
-            dbContextMock.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingCuongSach = new CUONSACH { id =idCuonSach, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1, SACH = sach };
             dbContextMock.Setup(db => db.CUONSACHes.Find(idCuonSach)).Returns(existingCuongSach);
 
 
             // Lưu giá trị ban đầu
-            bool result = dalCuonSach.DelCuonSach(idCuonSach);
+            bool result = dalCuonSach!.DelCuonSach(idCuonSach);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
-            cuonSachDbSetMock.Verify(m => m.Remove(existingCuongSach), Times.Once);
+            cuonSachDbSetMock!.Verify(m => m.Remove(existingCuongSach), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
         }
@@ -208,9 +208,9 @@ namespace UnitTesting
         {
             // Arrange
             var idCuonSach = 33;
-            var tinhTrang = 1;
+            
             // Act
-            bool result = dalCuonSach.DelCuonSach(idCuonSach);
+            bool result = dalCuonSach!.DelCuonSach(idCuonSach);
 
             // Assert
             Assert.IsFalse(result);
@@ -248,7 +248,7 @@ namespace UnitTesting
             var daAn = 2;
 
             var sach = new SACH { id = 1, SoLuongConLai = 3, SoLuong = 1 };
-            dbContextMock.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(db => db.SACHes.Find(sach.id)).Returns(sach);
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingCuongSach = new CUONSACH { id =idCuonSach, idSach = 1, MaCuonSach = "Sach001", DaAn = 1, TinhTrang =  1, SACH = sach };
             dbContextMock.Setup(db => db.CUONSACHes.Find(idCuonSach)).Returns(existingCuongSach);
@@ -258,7 +258,7 @@ namespace UnitTesting
             var initialTinhTrang = existingCuongSach.TinhTrang;
 
             // Act
-            bool result = dalCuonSach.UpdAnCuonSach(idCuonSach, daAn);
+            bool result = dalCuonSach!.UpdAnCuonSach(idCuonSach, daAn);
 
             // Assert
             Assert.IsTrue(result);
@@ -321,7 +321,7 @@ namespace UnitTesting
             var idCuonSach = 33;
             var daAn = 1;
             // Act
-            bool result = dalCuonSach.UpdCuonSach(idCuonSach, daAn);
+            bool result = dalCuonSach!.UpdCuonSach(idCuonSach, daAn);
 
             // Assert
             Assert.IsFalse(result);

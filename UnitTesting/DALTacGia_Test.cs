@@ -44,9 +44,9 @@ namespace UnitTesting
             // Arrange
 
             var tacgia = new TACGIA { id  = 1, MATACGIA = "TacGia001", TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
             // Act
-            List<TACGIA> result = dalTacGia.GetAllTacGia();
+            List<TACGIA> result = dalTacGia!.GetAllTacGia();
 
 
             // Assert
@@ -64,9 +64,9 @@ namespace UnitTesting
            
             var existingTacGiaId = 1;
             var tacgia = new TACGIA { id  = 1, MATACGIA = "TacGia001", TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
             // Act
-            TACGIA result = dalTacGia.GetTacGiaById(existingTacGiaId);
+            TACGIA result = dalTacGia!.GetTacGiaById(existingTacGiaId);
 
             // Assert
             Assert.IsNotNull(result); 
@@ -81,7 +81,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; 
 
             // Act
-            TACGIA result = dalTacGia.GetTacGiaById(nonExistingTacGiaId);
+            TACGIA result = dalTacGia!.GetTacGiaById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result); 
@@ -94,9 +94,9 @@ namespace UnitTesting
             
             var existingMaTacGia = "TacGia001";
             var tacgia = new TACGIA { id  = 1, MATACGIA = "TacGia001", TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
             // Act
-            TACGIA result = dalTacGia.GetTacGiaByMa(existingMaTacGia);
+            TACGIA result = dalTacGia!.GetTacGiaByMa(existingMaTacGia);
 
             // Assert
             Assert.IsNotNull(result);
@@ -111,7 +111,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia"; 
 
             // Act
-            TACGIA result = dalTacGia.GetTacGiaByMa(nonExistingMaTacGia);
+            TACGIA result = dalTacGia!.GetTacGiaByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -124,10 +124,10 @@ namespace UnitTesting
           
             var existingTenTacGia = "Nguyen Van A";
             var tacgia = new TACGIA { id  = 1, MATACGIA = "TacGia001", TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(tacgia.id)).Returns(tacgia);
 
             // Act
-            List<TACGIA> result = dalTacGia.FindTacGia(existingTenTacGia);
+            List<TACGIA> result = dalTacGia!.FindTacGia(existingTenTacGia);
 
             // Assert
             Assert.IsNotNull(result); 
@@ -152,20 +152,20 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingTacGia = new TACGIA { id = existingTacGiaId, TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(existingTacGiaId)).Returns(existingTacGia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(existingTacGiaId)).Returns(existingTacGia);
 
 
             // Lưu giá trị ban đầu
             var initialTenTacGia = existingTacGia.TenTacGia;
 
             // Act
-            bool result = dalTacGia.UpdTacGia(existingTacGiaId, newTenTacGia);
+            bool result = dalTacGia!.UpdTacGia(existingTacGiaId, newTenTacGia);
 
             // Assert
             Assert.IsTrue(result); 
 
             //// Kiểm tra xem TACGIA đã được cập nhật chưa
-            tacGiaDbSetMock.Verify(m => m.Find(existingTacGiaId), Times.Once);
+            tacGiaDbSetMock!.Verify(m => m.Find(existingTacGiaId), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
             //// Kiểm tra giá trị trước cập nhật và sau cập nhật
@@ -181,7 +181,7 @@ namespace UnitTesting
             var newTenTacGia = "Lam Van C"; 
 
             // Act
-            bool result = dalTacGia.UpdTacGia(nonExistingTacGiaId, newTenTacGia);
+            bool result = dalTacGia!.UpdTacGia(nonExistingTacGiaId, newTenTacGia);
 
             // Assert
             Assert.IsFalse(result); 
@@ -196,16 +196,16 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingTacGia = new TACGIA { id = existingTacGiaId, TenTacGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.TACGIAs.Find(existingTacGiaId)).Returns(existingTacGia);
+            dbContextMock!.Setup(db => db.TACGIAs.Find(existingTacGiaId)).Returns(existingTacGia);
 
             // Act
-            bool result = dalTacGia.DelTacGia(existingTacGiaId);
+            bool result = dalTacGia!.DelTacGia(existingTacGiaId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            tacGiaDbSetMock.Verify(m => m.Find(existingTacGiaId), Times.Once);
+            tacGiaDbSetMock!.Verify(m => m.Find(existingTacGiaId), Times.Once);
             tacGiaDbSetMock.Verify(m => m.Remove(existingTacGia), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -217,7 +217,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalTacGia.DelTacGia(nonExistingTacGiaId);
+            bool result = dalTacGia!.DelTacGia(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại
@@ -229,11 +229,11 @@ namespace UnitTesting
             var tacgia = new TACGIA { id  = 1, MATACGIA = "TacGia001", TenTacGia = "Nguyen Van A" };
 
 
-            int id = dalTacGia.AddTacGia(tacgia);
+            int id = dalTacGia!.AddTacGia(tacgia);
 
             Assert.IsTrue(id > 0);
-            tacGiaDbSetMock.Verify(m => m.Add(tacgia), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            tacGiaDbSetMock!.Verify(m => m.Add(tacgia), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
         }
 
 

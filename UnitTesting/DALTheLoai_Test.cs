@@ -45,9 +45,9 @@ namespace UnitTesting
             // Arrange
 
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
             // Act
-            List<THELOAI> result = dalTheLoai.GetAllTheLoai();
+            List<THELOAI> result = dalTheLoai!.GetAllTheLoai();
 
 
             // Assert
@@ -64,9 +64,9 @@ namespace UnitTesting
 
             var existingId = 1;
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
             // Act
-            THELOAI result = dalTheLoai.GetTheLoaiById(existingId);
+            THELOAI result = dalTheLoai!.GetTheLoaiById(existingId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -81,7 +81,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            THELOAI result = dalTheLoai.GetTheLoaiById(nonExistingTacGiaId);
+            THELOAI result = dalTheLoai!.GetTheLoaiById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -94,8 +94,8 @@ namespace UnitTesting
 
             var existingMaTheLoai = "TL001";
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
-            THELOAI result = dalTheLoai.GetTheLoaiByMa(existingMaTheLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            THELOAI result = dalTheLoai!.GetTheLoaiByMa(existingMaTheLoai);
 
             // Assert
             Assert.IsNotNull(result);
@@ -110,7 +110,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            THELOAI result = dalTheLoai.GetTheLoaiByMa(nonExistingMaTacGia);
+            THELOAI result = dalTheLoai!.GetTheLoaiByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -123,10 +123,10 @@ namespace UnitTesting
             var tenTheLoai = "TheLoai1";
 
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
 
             // Act
-            var result = dalTheLoai.FindTheLoai(tenTheLoai);
+            var result = dalTheLoai!.FindTheLoai(tenTheLoai);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null
@@ -141,9 +141,9 @@ namespace UnitTesting
             var tenTheLoai = "TheLoai3";
 
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
             // Act
-            var result = dalTheLoai.FindTheLoai(tenTheLoai);
+            var result = dalTheLoai!.FindTheLoai(tenTheLoai);
 
 
             // Assert
@@ -157,11 +157,11 @@ namespace UnitTesting
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
 
 
-            bool result = dalTheLoai.AddTheLoai(theLoai);
+            bool result = dalTheLoai!.AddTheLoai(theLoai);
 
             Assert.IsTrue(result);
-            theLoaiDbSetMock.Verify(m => m.Add(theLoai), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            theLoaiDbSetMock!.Verify(m => m.Add(theLoai), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
         }
 
 
@@ -173,20 +173,20 @@ namespace UnitTesting
             var tenTheLoai = "TheLoai3";
         
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
 
 
             // Lưu giá trị ban đầu
 
 
             // Act
-            bool result = dalTheLoai.UpdTheLoai(id, tenTheLoai );
+            bool result = dalTheLoai!.UpdTheLoai(id, tenTheLoai );
 
             // Assert
             Assert.IsTrue(result);
 
             //// Kiểm tra xem TACGIA đã được cập nhật chưa
-            theLoaiDbSetMock.Verify(m => m.Find(id), Times.Once);
+            theLoaiDbSetMock!.Verify(m => m.Find(id), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
             //// Kiểm tra giá trị trước cập nhật và sau cập nhật
@@ -206,7 +206,7 @@ namespace UnitTesting
 
 
             // Act
-            bool result = dalTheLoai.UpdTheLoai(id, tenTheLoai);
+            bool result = dalTheLoai!.UpdTheLoai(id, tenTheLoai);
             // Assert
             Assert.IsFalse(result);
         }
@@ -217,16 +217,16 @@ namespace UnitTesting
             var id = 1;
 
             var theLoai = new THELOAI { id = 1, MaTheLoai = "TL001", TenTheLoai = "TheLoai1" };
-            dbContextMock.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
+            dbContextMock!.Setup(db => db.THELOAIs.Find(theLoai.id)).Returns(theLoai);
 
             // 
-            bool result = dalTheLoai.DelTheLoai(id);
+            bool result = dalTheLoai!.DelTheLoai(id);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa 
-            theLoaiDbSetMock.Verify(m => m.Find(id), Times.Once);
+            theLoaiDbSetMock!.Verify(m => m.Find(id), Times.Once);
             theLoaiDbSetMock.Verify(m => m.Remove(theLoai), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -238,7 +238,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalTheLoai.DelTheLoai(nonExistingTacGiaId);
+            bool result = dalTheLoai!.DelTheLoai(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại

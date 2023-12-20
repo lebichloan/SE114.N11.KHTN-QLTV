@@ -46,9 +46,9 @@ namespace UnitTesting
             // Arrange
 
             var tuaSach = new TUASACH { id = 1, MaTuaSach = "TS001", TenTuaSach = "Tua Sach 001" };
-            dbContextMock.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
+            dbContextMock!.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
             // Act
-            List<TUASACH> result = dalTuaSach.GetAllTuaSach();
+            List<TUASACH> result = dalTuaSach!.GetAllTuaSach();
 
 
             // Assert
@@ -66,9 +66,9 @@ namespace UnitTesting
 
             var existingId = 1;
             var tuaSach = new TUASACH { id = 1, MaTuaSach = "TS001", TenTuaSach = "Tua Sach 001" };
-            dbContextMock.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
+            dbContextMock!.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
             // Act
-            TUASACH result = dalTuaSach.GetTuaSachById(existingId);
+            TUASACH result = dalTuaSach!.GetTuaSachById(existingId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -83,7 +83,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            TUASACH result = dalTuaSach.GetTuaSachById(nonExistingTacGiaId);
+            TUASACH result = dalTuaSach!.GetTuaSachById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -96,9 +96,9 @@ namespace UnitTesting
 
             var existingMaTuaSach= "TS001";
             var tuaSach = new TUASACH { id = 1, MaTuaSach = "TS001", TenTuaSach = "Tua Sach 001" };
-            dbContextMock.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
+            dbContextMock!.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
 
-            TUASACH result = dalTuaSach.GetTuaSachByMa(existingMaTuaSach);
+            TUASACH result = dalTuaSach!.GetTuaSachByMa(existingMaTuaSach);
 
             // Assert
             Assert.IsNotNull(result);
@@ -113,7 +113,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            TUASACH result = dalTuaSach.GetTuaSachByMa(nonExistingMaTacGia);
+            TUASACH result = dalTuaSach!.GetTuaSachByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -125,16 +125,16 @@ namespace UnitTesting
             var id = 1;
 
             var tuaSach = new TUASACH { id = 1, MaTuaSach = "TS001", TenTuaSach = "Tua Sach 001" };
-            dbContextMock.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
+            dbContextMock!.Setup(db => db.TUASACHes.Find(tuaSach.id)).Returns(tuaSach);
 
             // 
-            bool result = dalTuaSach.DelTuaSach(id);
+            bool result = dalTuaSach!.DelTuaSach(id);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa 
-            tuaSachDbSetMock.Verify(m => m.Find(id), Times.Once);
+            tuaSachDbSetMock!.Verify(m => m.Find(id), Times.Once);
             tuaSachDbSetMock.Verify(m => m.Remove(tuaSach), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -146,7 +146,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalTuaSach.DelTuaSach(nonExistingTacGiaId);
+            bool result = dalTuaSach!.DelTuaSach(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại

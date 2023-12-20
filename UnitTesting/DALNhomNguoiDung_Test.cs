@@ -45,9 +45,9 @@ namespace UnitTesting
             // Arrange
 
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
             // Act
-            List<NHOMNGUOIDUNG> result = dalNhomNguoiDung.GetAllNhomNguoiDung();
+            List<NHOMNGUOIDUNG> result = dalNhomNguoiDung!.GetAllNhomNguoiDung();
 
 
             // Assert
@@ -64,9 +64,9 @@ namespace UnitTesting
 
             var existingNhomNguoiDungId = 1;
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
             // Act
-            NHOMNGUOIDUNG result = dalNhomNguoiDung.GetNhomNguoiDungById(existingNhomNguoiDungId);
+            NHOMNGUOIDUNG result = dalNhomNguoiDung!.GetNhomNguoiDungById(existingNhomNguoiDungId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -81,7 +81,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            NHOMNGUOIDUNG result = dalNhomNguoiDung.GetNhomNguoiDungById(nonExistingTacGiaId);
+            NHOMNGUOIDUNG result = dalNhomNguoiDung!.GetNhomNguoiDungById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -95,8 +95,8 @@ namespace UnitTesting
 
             var existingMaNhomNguoiDung = "NND001";
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
-            NHOMNGUOIDUNG result = dalNhomNguoiDung.GetNhomNguoiDungByMa(existingMaNhomNguoiDung);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
+            NHOMNGUOIDUNG result = dalNhomNguoiDung!.GetNhomNguoiDungByMa(existingMaNhomNguoiDung);
 
             // Assert
             Assert.IsNotNull(result);
@@ -111,7 +111,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            NHOMNGUOIDUNG result = dalNhomNguoiDung.GetNhomNguoiDungByMa(nonExistingMaTacGia);
+            NHOMNGUOIDUNG result = dalNhomNguoiDung!.GetNhomNguoiDungByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -121,11 +121,11 @@ namespace UnitTesting
         public void Test_AddNhomNguoiDung()
         {
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            int result = dalNhomNguoiDung.AddNhomNguoiDung(nhomNguoiDung);
+            int result = dalNhomNguoiDung!.AddNhomNguoiDung(nhomNguoiDung);
 
             Assert.IsTrue(result > 0);
 
-            dbContextMock.Verify(m => m.NHOMNGUOIDUNGs.Add(nhomNguoiDung), Times.Once());
+            dbContextMock!.Verify(m => m.NHOMNGUOIDUNGs.Add(nhomNguoiDung), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
 
@@ -139,10 +139,10 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
 
             // Act
-            var result = dalNhomNguoiDung.UpdNhomNguoiDung(idNhomNguoiDung, tenNhom);
+            var result = dalNhomNguoiDung!.UpdNhomNguoiDung(idNhomNguoiDung, tenNhom);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm UpdTongNoDocGia trả về true khi cập nhật thành công
@@ -157,7 +157,7 @@ namespace UnitTesting
             var tenNhom = "Test"; // Giả sử một giá trị mới cho tổng nợ
 
             // Act
-            var result = dalNhomNguoiDung.UpdNhomNguoiDung(nonExistingIdNguoiDung, tenNhom);
+            var result = dalNhomNguoiDung!.UpdNhomNguoiDung(nonExistingIdNguoiDung, tenNhom);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm UpdTongNoDocGia trả về false khi không tìm thấy dữ liệu
@@ -177,11 +177,11 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho Nhóm người dùng
             var existingNhom = new NHOMNGUOIDUNG { id = idNhom, CHUCNANGs = dsChucNang };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(existingNhom.id)).Returns(existingNhom);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(existingNhom.id)).Returns(existingNhom);
 
 
             // Act
-            var result = dalNhomNguoiDung.AddChucNangForNhom(idNhom, dsChucNang);
+            var result = dalNhomNguoiDung!.AddChucNangForNhom(idNhom, dsChucNang);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm AddChucNangForNhom trả về true khi thêm thành công
@@ -201,7 +201,7 @@ namespace UnitTesting
         };
 
             // Act
-            var result = dalNhomNguoiDung.AddChucNangForNhom(nonExistingIdNhom, dsChucNang);
+            var result = dalNhomNguoiDung!.AddChucNangForNhom(nonExistingIdNhom, dsChucNang);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm AddChucNangForNhom trả về false khi không tìm thấy Nhóm người dùng
@@ -222,11 +222,11 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho Nhóm người dùng
             var existingNhom = new NHOMNGUOIDUNG { id = idNhom, CHUCNANGs = new List<CHUCNANG>(dsChucNang) /* Các thuộc tính khác có thể cần thiết lập tương ứng */ };
-            dbContextMock.Setup(x => x.NHOMNGUOIDUNGs.Find(idNhom)).Returns(existingNhom);
+            dbContextMock!.Setup(x => x.NHOMNGUOIDUNGs.Find(idNhom)).Returns(existingNhom);
 
           
             // Act
-            var result = dalNhomNguoiDung.DelChucNangForNhom(idNhom, dsChucNang);
+            var result = dalNhomNguoiDung!.DelChucNangForNhom(idNhom, dsChucNang);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelChucNangForNhom trả về true khi xóa thành công
@@ -245,7 +245,7 @@ namespace UnitTesting
         };
 
             // Act
-            var result = dalNhomNguoiDung.DelChucNangForNhom(nonExistingIdNhom, dsChucNang);
+            var result = dalNhomNguoiDung!.DelChucNangForNhom(nonExistingIdNhom, dsChucNang);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelChucNangForNhom trả về false khi không tìm thấy Nhóm người dùng
@@ -260,16 +260,16 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var nhomNguoiDung = new NHOMNGUOIDUNG { id = 1, MaNhomNguoiDung = "NND001", TenNhomNguoiDung = "Admin" };
-            dbContextMock.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
+            dbContextMock!.Setup(db => db.NHOMNGUOIDUNGs.Find(nhomNguoiDung.id)).Returns(nhomNguoiDung);
 
             // Act
-            bool result = dalNhomNguoiDung.DelNhomNguoiDung(existingNguoiDungId);
+            bool result = dalNhomNguoiDung!.DelNhomNguoiDung(existingNguoiDungId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            NhomNguoiDungDbSetMock.Verify(m => m.Find(existingNguoiDungId), Times.Once);
+            NhomNguoiDungDbSetMock!.Verify(m => m.Find(existingNguoiDungId), Times.Once);
             NhomNguoiDungDbSetMock.Verify(m => m.Remove(nhomNguoiDung), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -281,7 +281,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalNhomNguoiDung.DelNhomNguoiDung(nonExistingTacGiaId);
+            bool result = dalNhomNguoiDung!.DelNhomNguoiDung(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại

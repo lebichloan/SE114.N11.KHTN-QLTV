@@ -44,10 +44,10 @@ namespace UnitTesting
         {
             var docGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A" };
 
-            bool result = dalDocGia.AddDocGia(docGia);
+            bool result = dalDocGia!.AddDocGia(docGia);
 
             Assert.IsTrue(result);
-            dbContextMock.Verify(m => m.DOCGIAs.Add(docGia), Times.Once());
+            dbContextMock!.Verify(m => m.DOCGIAs.Add(docGia), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
 
@@ -58,9 +58,9 @@ namespace UnitTesting
 
             var existingDocGiaId = 1;
             var docGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
             // Act
-            DOCGIA result = dalDocGia.GetDocGiaById(existingDocGiaId);
+            DOCGIA result = dalDocGia!.GetDocGiaById(existingDocGiaId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -75,7 +75,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            DOCGIA result = dalDocGia.GetDocGiaById(nonExistingTacGiaId);
+            DOCGIA result = dalDocGia!.GetDocGiaById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -89,9 +89,9 @@ namespace UnitTesting
 
             var existingMaDocGia = "DG001";
             var docGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
             // Act
-            DOCGIA result = dalDocGia.GetDocGiaByMa(existingMaDocGia);
+            DOCGIA result = dalDocGia!.GetDocGiaByMa(existingMaDocGia);
 
             // Assert
             Assert.IsNotNull(result);
@@ -106,7 +106,7 @@ namespace UnitTesting
             var nonExistingMaTacGia = "NonExistingMaTacGia";
 
             // Act
-            DOCGIA result = dalDocGia.GetDocGiaByMa(nonExistingMaTacGia);
+            DOCGIA result = dalDocGia!.GetDocGiaByMa(nonExistingMaTacGia);
 
             // Assert
             Assert.IsNull(result);
@@ -119,9 +119,9 @@ namespace UnitTesting
             // Arrange
 
             var docGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A" };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
             // Act
-            List<DOCGIA> result = dalDocGia.GetAllDocGia();
+            List<DOCGIA> result = dalDocGia!.GetAllDocGia();
 
 
             // Assert
@@ -139,9 +139,9 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var docGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A", idNguoiDung = 1 };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(docGia.ID)).Returns(docGia);
             // Act
-            var result = dalDocGia.FindDocGiaByIdND(idNguoiDung);
+            var result = dalDocGia!.FindDocGiaByIdND(idNguoiDung);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng hàm FindDocGiaByIdND trả về một đối tượng DOCGIA
@@ -155,7 +155,7 @@ namespace UnitTesting
             var nonExistingIdNguoiDung = 999; // Thay thế bằng một ID người dùng không tồn tại trong cơ sở dữ liệu
 
             // Act
-            var result = dalDocGia.FindDocGiaByIdND(nonExistingIdNguoiDung);
+            var result = dalDocGia!.FindDocGiaByIdND(nonExistingIdNguoiDung);
 
             Assert.IsNull(result);
         }
@@ -174,9 +174,9 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingDocGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A", idNguoiDung = 1 };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
             // Act
-            var result = dalDocGia.UpdDocGia(idDocGia, tenDocGia, ngaySinh, diaChi, email, ngayHetHan, idLoaiDocGia);
+            var result = dalDocGia!.UpdDocGia(idDocGia, tenDocGia, ngaySinh, diaChi, email, ngayHetHan, idLoaiDocGia);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm UpdDocGia trả về true khi cập nhật thành công
@@ -199,7 +199,7 @@ namespace UnitTesting
             var nonExistingIdDocGia = 999; // Thay thế bằng một ID độc giả không tồn tại trong cơ sở dữ liệu
 
             // Act
-            var result = dalDocGia.UpdDocGia(nonExistingIdDocGia, "New Ten Doc Gia", DateTime.Now, "New Dia Chi", "new.email@example.com", DateTime.Now, 1);
+            var result = dalDocGia!.UpdDocGia(nonExistingIdDocGia, "New Ten Doc Gia", DateTime.Now, "New Dia Chi", "new.email@example.com", DateTime.Now, 1);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm UpdDocGia trả về false khi không tìm thấy dữ liệu
@@ -214,10 +214,10 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingDocGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A", idNguoiDung = 1 };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
 
             // Act
-            var result = dalDocGia.UpdTongNoDocGia(idDocGia, tongNoMoi);
+            var result = dalDocGia!.UpdTongNoDocGia(idDocGia, tongNoMoi);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm UpdTongNoDocGia trả về true khi cập nhật thành công
@@ -233,7 +233,7 @@ namespace UnitTesting
             var tongNoMoi = 50000; // Giả sử một giá trị mới cho tổng nợ
 
             // Act
-            var result = dalDocGia.UpdTongNoDocGia(nonExistingIdDocGia, tongNoMoi);
+            var result = dalDocGia!.UpdTongNoDocGia(nonExistingIdDocGia, tongNoMoi);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm UpdTongNoDocGia trả về false khi không tìm thấy dữ liệu
@@ -247,16 +247,16 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var existingDocGia = new DOCGIA { ID = 1, MaDocGia = "DG001", TenDocGia = "Nguyen Van A", idNguoiDung = 1 };
-            dbContextMock.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
+            dbContextMock!.Setup(db => db.DOCGIAs.Find(existingDocGia.ID)).Returns(existingDocGia);
 
             // Act
-            bool result = dalDocGia.DelDocGia(existingDocGiaId);
+            bool result = dalDocGia!.DelDocGia(existingDocGiaId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            DocGiaDbSetMock.Verify(m => m.Find(existingDocGiaId), Times.Once);
+            DocGiaDbSetMock!.Verify(m => m.Find(existingDocGiaId), Times.Once);
             DocGiaDbSetMock.Verify(m => m.Remove(existingDocGia), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -268,7 +268,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalDocGia.DelDocGia(nonExistingTacGiaId);
+            bool result = dalDocGia!.DelDocGia(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại

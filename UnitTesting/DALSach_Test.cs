@@ -41,7 +41,7 @@ namespace UnitTesting
         [TestMethod]
         public void Test_GetAllSach()
         {
-            var result = dalSach.GetAllSach() as List<SACH>;
+            var result = dalSach!.GetAllSach() as List<SACH>;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
@@ -53,9 +53,9 @@ namespace UnitTesting
             var idSach = 1;
             var expectedSach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
 
-            dbContextMock.Setup(db => db.SACHes.Find(idSach)).Returns(expectedSach);
+            dbContextMock!.Setup(db => db.SACHes.Find(idSach)).Returns(expectedSach);
 
-            var result = dalSach.GetSachById(idSach);
+            var result = dalSach!.GetSachById(idSach);
 
             Assert.AreEqual(expectedSach.id, result.id);
         
@@ -68,9 +68,9 @@ namespace UnitTesting
             var maSach = "Sach001";
             var expectedSach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
 
-            dbContextMock.Setup(db => db.SACHes.Find(maSach)).Returns(expectedSach);
+            dbContextMock!.Setup(db => db.SACHes.Find(maSach)).Returns(expectedSach);
 
-            var result = dalSach.GetSachByMa(maSach);
+            var result = dalSach!.GetSachByMa(maSach);
 
             Assert.AreEqual(expectedSach.id, result.id);
 
@@ -83,11 +83,11 @@ namespace UnitTesting
             var sach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
 
       
-            int id = dalSach.AddSachMoi(sach);
+            int id = dalSach!.AddSachMoi(sach);
 
             Assert.IsTrue(id > 0);
 
-            dbContextMock.Verify(m => m.SACHes.Add(sach), Times.Once());
+            dbContextMock!.Verify(m => m.SACHes.Add(sach), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
         }
@@ -96,9 +96,9 @@ namespace UnitTesting
         public void Test_AddSachDaCo_IsTrue()
         {
             var sach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
-            dbContextMock.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
 
-            var result = dalSach.AddSachDaCo(sach.id, 10);
+            var result = dalSach!.AddSachDaCo(sach.id, 10);
 
             Assert.IsTrue(result);
 
@@ -111,9 +111,9 @@ namespace UnitTesting
         public void Test_AddSachDaCo_IsFalse()
         {
             var sach = new SACH { id = 3, MaSach = "Sach003", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
-            dbContextMock.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
 
-            var result = dalSach.AddSachDaCo(99, 10);
+            var result = dalSach!.AddSachDaCo(99, 10);
 
             Assert.IsFalse(result);
         }
@@ -124,12 +124,12 @@ namespace UnitTesting
             var existingSachId = 1;
 
             var sach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
-            dbContextMock.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
 
-            bool result = dalSach.DelSach(existingSachId);
+            bool result = dalSach!.DelSach(existingSachId);
             Assert.IsTrue(result);
 
-            sachDbSetMock.Verify(m => m.Remove(sach), Times.Once);
+            sachDbSetMock!.Verify(m => m.Remove(sach), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
 
@@ -138,7 +138,7 @@ namespace UnitTesting
         {
             var nonExistingSachId = 3;
 
-            bool result = dalSach.DelSach(nonExistingSachId);
+            bool result = dalSach!.DelSach(nonExistingSachId);
             Assert.IsFalse(result);
         }
 
@@ -148,12 +148,12 @@ namespace UnitTesting
             // Arrange
             var existingSachId = 1;
             var sach = new SACH { id = 1, MaSach = "Sach001", idTuaSach = 1, SoLuong = 10, SoLuongConLai = 5, DonGia = 100000, NamXB = 2022, NhaXB = "Tuoi Tre", DaAn = 3 };
-            dbContextMock.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
+            dbContextMock!.Setup(m => m.SACHes.Find(sach.id)).Returns(sach);
 
             var newData = 1; 
 
             // Act
-            bool result = dalSach.UpdAnSach(existingSachId, newData);
+            bool result = dalSach!.UpdAnSach(existingSachId, newData);
 
             // Assert
             Assert.IsTrue(result);
@@ -172,7 +172,7 @@ namespace UnitTesting
             var newData = 1;
 
             // Act
-            bool result = dalSach.UpdAnSach(existingSachId, newData);
+            bool result = dalSach!.UpdAnSach(existingSachId, newData);
 
             // Assert
             Assert.IsFalse(result);

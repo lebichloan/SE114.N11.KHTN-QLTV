@@ -47,9 +47,9 @@ namespace UnitTesting
             // Arrange
 
             var baocao = new BCLUOTMUONTHEOTHELOAI { id = 1, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BC001" };
-            dbContextMock.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
+            dbContextMock!.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
             // Act
-            List<BCLUOTMUONTHEOTHELOAI> result = dalBCLuotMuonTheoTheLoai.GetAllBaoCao();
+            List<BCLUOTMUONTHEOTHELOAI> result = dalBCLuotMuonTheoTheLoai!.GetAllBaoCao();
 
 
             // Assert
@@ -67,9 +67,9 @@ namespace UnitTesting
 
             var existingId = 1;
             var baocao = new BCLUOTMUONTHEOTHELOAI { id = 1, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BC001" };
-            dbContextMock.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
+            dbContextMock!.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
             // Act
-            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai.GetBaoCaoById(existingId);
+            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai!.GetBaoCaoById(existingId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -84,7 +84,7 @@ namespace UnitTesting
             var nonExistingId = 999;
 
             // Act
-            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai.GetBaoCaoById(nonExistingId);
+            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai!.GetBaoCaoById(nonExistingId);
 
             // Assert
             Assert.IsNull(result);
@@ -100,13 +100,13 @@ namespace UnitTesting
             var baocao = new BCLUOTMUONTHEOTHELOAI { id = 1, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BaoCao001" };
             var data = new List<BCLUOTMUONTHEOTHELOAI> { baocao };
             var mockData = data.AsQueryable();
-            bcLuotMuonTheoTheLoaiDbSetMock.As<IQueryable<BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            bcLuotMuonTheoTheLoaiDbSetMock!.As<IQueryable<BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Provider).Returns(mockData.Provider);
             bcLuotMuonTheoTheLoaiDbSetMock.As<IQueryable<BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.Expression).Returns(mockData.Expression);
             bcLuotMuonTheoTheLoaiDbSetMock.As<IQueryable<BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             bcLuotMuonTheoTheLoaiDbSetMock.As<IQueryable<BCLUOTMUONTHEOTHELOAI>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
-            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai.GetBaoCaoByMa(existingMaBaoCao);
+            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai!.GetBaoCaoByMa(existingMaBaoCao);
 
             // Assert
             Assert.IsNotNull(result);
@@ -121,7 +121,7 @@ namespace UnitTesting
             var nonExistingMaBaoCao = "NonExistingMaBaoCao";
 
             // Act
-            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai.GetBaoCaoByMa(nonExistingMaBaoCao);
+            BCLUOTMUONTHEOTHELOAI result = dalBCLuotMuonTheoTheLoai!.GetBaoCaoByMa(nonExistingMaBaoCao);
 
             // Assert
             Assert.IsNull(result);
@@ -134,9 +134,9 @@ namespace UnitTesting
             var baocao = new BCLUOTMUONTHEOTHELOAI { id = 1, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BaoCao001" };
 
 
-            int id = dalBCLuotMuonTheoTheLoai.AddBaoCao(baocao);
+            int id = dalBCLuotMuonTheoTheLoai!.AddBaoCao(baocao);
 
-            dbContextMock.Verify(m => m.BCLUOTMUONTHEOTHELOAIs.Add(baocao), Times.Once());
+            dbContextMock!.Verify(m => m.BCLUOTMUONTHEOTHELOAIs.Add(baocao), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
         }
@@ -184,15 +184,15 @@ namespace UnitTesting
             // Thiết lập dữ liệu giả mạo cho DbSet
          
             var baocao = new BCLUOTMUONTHEOTHELOAI { id = existingId, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BC001" };
-            dbContextMock.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
+            dbContextMock!.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(baocao.id)).Returns(baocao);
             // Act
-            bool result = dalBCLuotMuonTheoTheLoai.DelBaoCao(existingId);
+            bool result = dalBCLuotMuonTheoTheLoai!.DelBaoCao(existingId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            bcLuotMuonTheoTheLoaiDbSetMock.Verify(m => m.Find(existingId), Times.Once);
+            bcLuotMuonTheoTheLoaiDbSetMock!.Verify(m => m.Find(existingId), Times.Once);
             bcLuotMuonTheoTheLoaiDbSetMock.Verify(m => m.Remove(baocao), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -204,7 +204,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalBCLuotMuonTheoTheLoai.DelBaoCao(nonExistingTacGiaId);
+            bool result = dalBCLuotMuonTheoTheLoai!.DelBaoCao(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại
@@ -259,10 +259,10 @@ namespace UnitTesting
             var nam = 2023;
 
             var bc = new BCLUOTMUONTHEOTHELOAI { id = 1, Thang = 2, Nam = 2023, TongSoLuotMuon = 10, MaBaoCao = "BC001" };
-            dbContextMock.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(bc.id)).Returns(bc);
+            dbContextMock!.Setup(db => db.BCLUOTMUONTHEOTHELOAIs.Find(bc.id)).Returns(bc);
 
             // Act
-            var result = dalBCLuotMuonTheoTheLoai.FindBaoCaoByDate(thang, nam);
+            var result = dalBCLuotMuonTheoTheLoai!.FindBaoCaoByDate(thang, nam);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null

@@ -46,14 +46,14 @@ namespace UnitTesting
             var phieunhap = new CT_PHIEUNHAP { SoPhieuNhap = 1, idSach = 1, DonGia = 40000, SoLuongNhap  = 2, ThanhTien = 80000 };
             var data = new List<CT_PHIEUNHAP> { phieunhap };
             var mockData = data.AsQueryable();
-            CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTPhieuNhapDbSetMock!.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
 
-            List<CT_PHIEUNHAP> result = dalCTPhieuNhap.GetAllCTPhieuNhap();
+            List<CT_PHIEUNHAP> result = dalCTPhieuNhap!.GetAllCTPhieuNhap();
 
 
             // Assert
@@ -73,13 +73,13 @@ namespace UnitTesting
             var phieunhap = new CT_PHIEUNHAP { SoPhieuNhap = soPhieuNhap, idSach = idSach, DonGia = 40000, SoLuongNhap  = 2, ThanhTien = 80000 };
             var data = new List<CT_PHIEUNHAP> { phieunhap };
             var mockData = data.AsQueryable();
-            CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Provider).Returns(mockData.Provider);
+            CTPhieuNhapDbSetMock!.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Provider).Returns(mockData.Provider);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.Expression).Returns(mockData.Expression);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.ElementType).Returns(mockData.ElementType);
             CTPhieuNhapDbSetMock.As<IQueryable<CT_PHIEUNHAP>>().Setup(m => m.GetEnumerator()).Returns(mockData.GetEnumerator());
 
             // Act
-            CT_PHIEUNHAP result = dalCTPhieuNhap.GetCT_PHIEUNHAP(soPhieuNhap, idSach);
+            CT_PHIEUNHAP result = dalCTPhieuNhap!.GetCT_PHIEUNHAP(soPhieuNhap, idSach);
 
             // Assert
             Assert.IsNotNull(result);
@@ -96,7 +96,7 @@ namespace UnitTesting
             var nonExistingidSach = 888;
 
             // Act
-            CT_PHIEUNHAP result = dalCTPhieuNhap.GetCT_PHIEUNHAP(nonExistingsoPhieuNhap, nonExistingidSach);
+            CT_PHIEUNHAP result = dalCTPhieuNhap!.GetCT_PHIEUNHAP(nonExistingsoPhieuNhap, nonExistingidSach);
 
             // Assert
             Assert.IsNull(result);
@@ -108,11 +108,11 @@ namespace UnitTesting
         {
             var phieuNhap = new CT_PHIEUNHAP { SoPhieuNhap = 1, idSach = 1, DonGia = 40000, SoLuongNhap  = 2, ThanhTien = 80000 };
 
-            bool result = dalCTPhieuNhap.AddCTPhieuNhap(phieuNhap);
+            bool result = dalCTPhieuNhap!.AddCTPhieuNhap(phieuNhap);
 
             Assert.IsTrue(result);
 
-            dbContextMock.Verify(m => m.CT_PHIEUNHAP.Add(phieuNhap), Times.Once());
+            dbContextMock!.Verify(m => m.CT_PHIEUNHAP.Add(phieuNhap), Times.Once());
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
         }
