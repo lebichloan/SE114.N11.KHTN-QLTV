@@ -47,9 +47,9 @@ namespace UnitTesting
             // Arrange
 
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000 };
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
             // Act
-            List<PHIEUNHAPSACH> result = dalPhieuNhapSach.GetAllPhieuNhapSach();
+            List<PHIEUNHAPSACH> result = dalPhieuNhapSach!.GetAllPhieuNhapSach();
 
 
             // Assert
@@ -66,10 +66,10 @@ namespace UnitTesting
 
             var existingId = 1;
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000 };
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
             // Act
             // Act
-            PHIEUNHAPSACH result = dalPhieuNhapSach.GetPhieuById(existingId);
+            PHIEUNHAPSACH result = dalPhieuNhapSach!.GetPhieuById(existingId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -84,7 +84,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999;
 
             // Act
-            PHIEUNHAPSACH result = dalPhieuNhapSach.GetPhieuById(nonExistingTacGiaId);
+            PHIEUNHAPSACH result = dalPhieuNhapSach!.GetPhieuById(nonExistingTacGiaId);
 
             // Assert
             Assert.IsNull(result);
@@ -97,10 +97,10 @@ namespace UnitTesting
             var ngayNhap = DateTime.Now;
 
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000, NgayNhap = ngayNhap };
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
 
             // Act
-            var result = dalPhieuNhapSach.FindPhieuByNgayNhap(ngayNhap.Day, ngayNhap.Month, ngayNhap.Year);
+            var result = dalPhieuNhapSach!.FindPhieuByNgayNhap(ngayNhap.Day, ngayNhap.Month, ngayNhap.Year);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null
@@ -115,10 +115,10 @@ namespace UnitTesting
             var ngayMuon = DateTime.Now;
 
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000 };
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
 
             // Act
-            var result = dalPhieuNhapSach.FindPhieuByNgayNhap(ngayMuon.Day, ngayMuon.Month, ngayMuon.Year);
+            var result = dalPhieuNhapSach!.FindPhieuByNgayNhap(ngayMuon.Day, ngayMuon.Month, ngayMuon.Year);
 
             // Assert
             Assert.IsNotNull(result); // Đảm bảo rằng danh sách trả về không null
@@ -131,11 +131,11 @@ namespace UnitTesting
             var phieuNhapSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000 };
 
 
-            int result = dalPhieuNhapSach.AddPhieuNhap(phieuNhapSach);
+            int result = dalPhieuNhapSach!.AddPhieuNhap(phieuNhapSach);
 
             Assert.IsTrue(result > 0);
-            phieuNhapSachDbSetMock.Verify(m => m.Add(phieuNhapSach), Times.Once);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
+            phieuNhapSachDbSetMock!.Verify(m => m.Add(phieuNhapSach), Times.Once);
+            dbContextMock!.Verify(m => m.SaveChanges(), Times.Once);
         }
 
         [TestMethod]
@@ -148,20 +148,20 @@ namespace UnitTesting
 
             // Thiết lập dữ liệu giả mạo cho DbSet
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000, NgayNhap  =  DateTime.Now};
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
 
 
             // Lưu giá trị ban đầu
 
 
             // Act
-            bool result = dalPhieuNhapSach.UpdPhieuNhap(soPhieu, ngayNhap, tongTien);
+            bool result = dalPhieuNhapSach!.UpdPhieuNhap(soPhieu, ngayNhap, tongTien);
 
             // Assert
             Assert.IsTrue(result);
 
             //// Kiểm tra xem TACGIA đã được cập nhật chưa
-            phieuNhapSachDbSetMock.Verify(m => m.Find(soPhieu), Times.Once);
+            phieuNhapSachDbSetMock!.Verify(m => m.Find(soPhieu), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
 
             //// Kiểm tra giá trị trước cập nhật và sau cập nhật
@@ -182,7 +182,7 @@ namespace UnitTesting
 
 
             // Act
-            bool result = dalPhieuNhapSach.UpdPhieuNhap(soPhieu, ngayNhap, tongTien);
+            bool result = dalPhieuNhapSach!.UpdPhieuNhap(soPhieu, ngayNhap, tongTien);
             // Assert
             Assert.IsFalse(result);
         }
@@ -195,16 +195,16 @@ namespace UnitTesting
             // Arrange
             var existingId = 1;
             var phieuMuonSach = new PHIEUNHAPSACH { SoPhieuNhap = 1, TongTien = 30000 };
-            dbContextMock.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
+            dbContextMock!.Setup(db => db.PHIEUNHAPSACHes.Find(phieuMuonSach.SoPhieuNhap)).Returns(phieuMuonSach);
 
             // Act
-            bool result = dalPhieuNhapSach.DelPhieuNhap(existingId);
+            bool result = dalPhieuNhapSach!.DelPhieuNhap(existingId);
 
             // Assert
             Assert.IsTrue(result); // Đảm bảo rằng hàm DelTacGia trả về true khi xóa thành công
 
             // Kiểm tra xem TACGIA đã được xóa chưa
-            phieuNhapSachDbSetMock.Verify(m => m.Find(existingId), Times.Once);
+            phieuNhapSachDbSetMock!.Verify(m => m.Find(existingId), Times.Once);
             phieuNhapSachDbSetMock.Verify(m => m.Remove(phieuMuonSach), Times.Once);
             dbContextMock.Verify(m => m.SaveChanges(), Times.Once);
         }
@@ -216,7 +216,7 @@ namespace UnitTesting
             var nonExistingTacGiaId = 999; // Thay thế bằng một ID không tồn tại trong cơ sở dữ liệu
 
             // Act
-            bool result = dalPhieuNhapSach.DelPhieuNhap(nonExistingTacGiaId);
+            bool result = dalPhieuNhapSach!.DelPhieuNhap(nonExistingTacGiaId);
 
             // Assert
             Assert.IsFalse(result); // Đảm bảo rằng hàm DelTacGia trả về false khi xóa TACGIA không tồn tại
