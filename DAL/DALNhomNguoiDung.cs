@@ -65,7 +65,7 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                
                 return false;
@@ -83,7 +83,7 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -102,7 +102,7 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
               
                 return false;
@@ -118,7 +118,7 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
               
                 return false;

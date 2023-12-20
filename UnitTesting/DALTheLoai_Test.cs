@@ -13,9 +13,9 @@ namespace UnitTesting
     [TestClass]
     public class DALTheLoai_Test
     {
-        private DALTheLoai dalTheLoai;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<THELOAI>> theLoaiDbSetMock;
+        private DALTheLoai? dalTheLoai;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<THELOAI>>? theLoaiDbSetMock;
 
         [TestInitialize]
         public void Setup()

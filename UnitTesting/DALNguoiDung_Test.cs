@@ -13,9 +13,9 @@ namespace UnitTesting
     [TestClass]
     public class DALNguoiDung_Test
     {
-        private DALNguoiDung dalNguoiDung;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<NGUOIDUNG>> NguoiDungDbSetMock;
+        private DALNguoiDung? dalNguoiDung;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<NGUOIDUNG>>? NguoiDungDbSetMock;
 
         [TestInitialize]
         public void Setup()

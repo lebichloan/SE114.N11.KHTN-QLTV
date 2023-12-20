@@ -13,9 +13,9 @@ namespace UnitTesting
     [TestClass]
     public class DALTacGia_Test
     {
-        private DALTacGia dalTacGia;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<TACGIA>> tacGiaDbSetMock;
+        private DALTacGia? dalTacGia;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<TACGIA>>? tacGiaDbSetMock;
 
         [TestInitialize]
         public void Setup()

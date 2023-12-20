@@ -13,9 +13,9 @@ namespace UnitTesting
     [TestClass]
     public class DALPhieuNhapSach_Test
     {
-        private DALPhieuNhapSach dalPhieuNhapSach;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<PHIEUNHAPSACH>> phieuNhapSachDbSetMock;
+        private DALPhieuNhapSach? dalPhieuNhapSach;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<PHIEUNHAPSACH>>? phieuNhapSachDbSetMock;
 
         [TestInitialize]
         public void Setup()

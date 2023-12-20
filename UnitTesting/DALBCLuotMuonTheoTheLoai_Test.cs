@@ -13,10 +13,10 @@ namespace UnitTesting
     [TestClass]
     public class DALBCLuotMuonTheoTheLoai_Test
     {
-        private DALBCLuotMuonTheoTheLoai dalBCLuotMuonTheoTheLoai;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<BCLUOTMUONTHEOTHELOAI>> bcLuotMuonTheoTheLoaiDbSetMock;
-        private Mock<DbSet<CT_BCLUOTMUONTHEOTHELOAI>> bcctLuotMuonTheoTheLoaiDbSetMock;
+        private DALBCLuotMuonTheoTheLoai? dalBCLuotMuonTheoTheLoai;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<BCLUOTMUONTHEOTHELOAI>>? bcLuotMuonTheoTheLoaiDbSetMock;
+        private Mock<DbSet<CT_BCLUOTMUONTHEOTHELOAI>>? bcctLuotMuonTheoTheLoaiDbSetMock;
 
         [TestInitialize]
         public void Setup()

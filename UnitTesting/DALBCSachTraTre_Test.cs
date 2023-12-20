@@ -14,9 +14,9 @@ namespace UnitTesting
     public class DALBCSachTraTre_Test
     {
 
-        private DALBCSachTraTre dalBCSachTraTre;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<BCSACHTRATRE>> bcSachTraTreDbSetMock;
+        private DALBCSachTraTre? dalBCSachTraTre;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<BCSACHTRATRE>>? bcSachTraTreDbSetMock;
      
 
         [TestInitialize]

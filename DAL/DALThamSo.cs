@@ -54,9 +54,9 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch
             {
-                Console.WriteLine(ex.InnerException.ToString());
+                
                 return false;
             }
             
@@ -70,9 +70,9 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
-                Console.WriteLine(ex.InnerException.ToString());
+              
                 return false;
             }
         }
@@ -86,9 +86,9 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.InnerException.ToString());
+               
                 return false;
             }
         }
@@ -102,9 +102,9 @@ namespace DAL
                 QLTVDb.Instance.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
-                Console.WriteLine(ex.InnerException.ToString());
+              
                 return false;
             }
 

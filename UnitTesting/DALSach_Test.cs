@@ -13,9 +13,9 @@ namespace UnitTesting
     [TestClass]
     public class DALSach_Test
     {
-        private DALSach dalSach;
-        private Mock<QLTVDb> dbContextMock;
-        private Mock<DbSet<SACH>> sachDbSetMock;
+        private DALSach? dalSach;
+        private Mock<QLTVDb>? dbContextMock;
+        private Mock<DbSet<SACH>>? sachDbSetMock;
 
         [TestInitialize]
         public void Setup()
