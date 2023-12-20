@@ -106,6 +106,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="fAddDocGia.cs">
       <SubType>Form</SubType>
     </Compile>
