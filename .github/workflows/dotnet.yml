@@ -11,14 +11,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+        nuget: [latest, preview, 4.x, 5.3.1]
+
+    name: NuGet@${{ matrix.nuget }} sample
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
       - name: Restore dependencies
         run: dotnet restore
 
