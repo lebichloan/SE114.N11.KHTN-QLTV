@@ -106,6 +106,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Siticone.Desktop.UI">
+      <Version>2.1.1</Version>
+    </PackageReference>
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
