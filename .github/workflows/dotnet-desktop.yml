@@ -51,8 +51,10 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
+        operating-system: [ubuntu-latest, windows-latest]
+        dotnet-version: ['6.0', '7.0', '8.0']
 
-    runs-on: windows-latest  # For a list of available runner types, refer to
+    runs-on: ${{ matrix.operating-system }}  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
@@ -71,7 +73,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ matrix.dotnet-version }}
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
