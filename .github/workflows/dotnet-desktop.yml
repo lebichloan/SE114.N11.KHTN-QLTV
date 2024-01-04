@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        operating-system: [ubuntu-latest, windows-latest]
+        operating-system: [windows-latest]
         dotnet-version: ['6.0', '7.0', '8.0']
 
     runs-on: ${{ matrix.operating-system }}  # For a list of available runner types, refer to
